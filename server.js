@@ -13,3 +13,18 @@ app.listen(port, host, (error) => {
     console.log(`Server started at port ${port}`);
   }
 });
+
+app.get("/convert", async (req, res) => {
+  const format = req.query.format;
+  const text = req.query.text;
+
+  try {
+    const response = await fetch(
+      `http://localhost:3001/format?format=txt&text=${text}`
+    );
+
+    const message = await response.text();
+  } catch (error) {
+    console.error(error);
+  }
+});
